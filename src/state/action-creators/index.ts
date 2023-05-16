@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { IBook } from '../../models/Book';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
@@ -23,6 +24,12 @@ export const addCurrentlyReading =
       payload,
     });
   };
+export const removeBook = (book: IBook): Action => {
+  return {
+    type: ActionType.REMOVE_BOOK,
+    payload: book,
+  };
+};
 
 export const getAllBooks = (payload: any[]) => (dispatch: Dispatch<Action>) => {
   dispatch({

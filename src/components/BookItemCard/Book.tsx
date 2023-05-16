@@ -1,9 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { update } from '../../BookAPI';
+import { Dispatch, bindActionCreators } from 'redux';
+import { remove, update } from '../../BookAPI';
 import { IBook } from '../../models/Book';
 import { actionCreators } from '../../state';
+import { removeBook } from '../../state/action-creators';
 import './Book.css';
 
 interface BookProps {
@@ -14,8 +15,17 @@ const Book: React.FC<BookProps> = ({ book }) => {
   const dispatch = useDispatch();
   const { setShelf } = bindActionCreators(actionCreators, dispatch);
 
+  const removeBookFromShelf = (bookToRemove: IBook) => {
+    remove(bookToRemove.id);
+    dispatch(removeBook(bookToRemove));
+  };
   const selectShelfHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedShelf = event.target.value;
+
+    if (selectedShelf === 'remove') {
+      removeBookFromShelf(book);
+    }
+
     setShelf(book, selectedShelf);
     updateSelectedBook(selectedShelf);
   };
@@ -48,12 +58,10 @@ const Book: React.FC<BookProps> = ({ book }) => {
               id='selecteId'
               value={book.shelf}
             >
-              <option disabled value='moveTo'>
+              <option selected disabled value='moveTo'>
                 Move To
               </option>
-              <option selected value='wantToRead'>
-                Want to Read
-              </option>
+              <option value='wantToRead'>Want to Read</option>
               <option value='read'>Read</option>
               <option value='currentlyReading'>Currently Reading</option>
               <option value='remove'>Remove</option>

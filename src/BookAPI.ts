@@ -8,7 +8,7 @@ if (!token) token = localStorage.token = Math.random().toString(36).substr(-8);
 
 const headers = {
   Accept: 'application/json',
-  Authorization: token,
+  Authorization: token || undefined,
 };
 
 export const get = (bookId: string) =>
@@ -29,6 +29,12 @@ export const update = (book: IBook, shelf: string) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ shelf }),
+  }).then((res) => res.json());
+
+export const remove = (bookId: string | undefined) =>
+  fetch(`${api}/books/${bookId}`, {
+    method: 'DELETE',
+    headers,
   }).then((res) => res.json());
 
 export const search = (query: string, maxResults?: number) =>

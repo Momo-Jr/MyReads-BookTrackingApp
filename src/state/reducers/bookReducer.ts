@@ -8,6 +8,8 @@ const reducer = (state: IBook[] = initialState, action: Action): IBook[] => {
   switch (action.type) {
     case ActionType.GetAll:
       return action.payload;
+    case ActionType.REMOVE_BOOK:
+      return state.filter((book) => book.id !== action.payload.id);
     case ActionType.Searched:
       return action.payload;
     case ActionType.Want:
