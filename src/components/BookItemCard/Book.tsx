@@ -25,7 +25,6 @@ const Book: React.FC<BookProps> = ({ book }) => {
       console.log(updatedBook);
     });
   };
-
   return (
     <li>
       <div className='book'>
@@ -57,6 +56,7 @@ const Book: React.FC<BookProps> = ({ book }) => {
               </option>
               <option value='read'>Read</option>
               <option value='currentlyReading'>Currently Reading</option>
+              <option value='remove'>Remove</option>
             </select>
           </div>
         </div>
