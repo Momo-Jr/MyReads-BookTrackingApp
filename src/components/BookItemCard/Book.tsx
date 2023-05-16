@@ -15,10 +15,12 @@ const Book: React.FC<BookProps> = ({ book }) => {
   const { setShelf } = bindActionCreators(actionCreators, dispatch);
 
   const selectShelfHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    setShelf(book, event.target.value);
-    updateSelectedBook(book, event.target.value);
+    const selectedShelf = event.target.value;
+    setShelf(book, selectedShelf);
+    updateSelectedBook(selectedShelf);
   };
-  const updateSelectedBook = (book: IBook, shelf: string) => {
+
+  const updateSelectedBook = (shelf: string) => {
     update(book, shelf).then((updatedBook) => {
       console.log(updatedBook);
     });
@@ -47,10 +49,12 @@ const Book: React.FC<BookProps> = ({ book }) => {
               id='selecteId'
               value={book.shelf}
             >
-              <option selected disabled value='moveTo'>
+              <option disabled value='moveTo'>
                 Move To
               </option>
-              <option value='wantToRead'>Want to Read</option>
+              <option selected value='wantToRead'>
+                Want to Read
+              </option>
               <option value='read'>Read</option>
               <option value='currentlyReading'>Currently Reading</option>
             </select>

@@ -1,52 +1,31 @@
+import { IBook } from '../../models/Book';
 import { ActionType } from '../action-types/index';
 import { Action } from '../actions';
 
-const initialState: any[] = [];
+const initialState: IBook[] = [];
 
-const reducer = (state = initialState, action: Action): any => {
-  if (action.type === ActionType.GetAll) {
-    if (state.length === 0) {
-      return [...state, ...action.payload];
-    } else {
-      state = [];
-      return [...state, ...action.payload];
-    }
-  } else if (action.type === ActionType.Searched) {
-    if (state.length > 0) {
-      state = [];
-      state = [...state, ...action.payload];
-    } else {
-      state = [...state, ...action.payload];
-    }
-    return state;
-  } else if (action.type === ActionType.Want) {
-    return [
-      ...state.filter((book) => book.id !== action.payload.id),
-      {
-        ...action.payload,
-        shelf: ActionType.Want,
-      },
-    ];
-  } else if (action.type === ActionType.Read) {
-    return [
-      ...state.filter((book) => book.id !== action.payload.id),
-      {
-        ...action.payload,
-        shelf: ActionType.Read,
-      },
-    ];
-  } else if (action.type === ActionType.Current) {
-    return [
-      ...state.filter((book) => book.id !== action.payload.id),
-      {
-        ...action.payload,
-        shelf: ActionType.Current,
-      },
-    ];
-  } else if (action.type === ActionType.SearchNull) {
-    return (state = []);
-  } else {
-    return state;
+const reducer = (state: IBook[] = initialState, action: Action): IBook[] => {
+  switch (action.type) {
+    case ActionType.GetAll:
+      return action.payload;
+    case ActionType.Searched:
+      return action.payload;
+    case ActionType.Want:
+    case ActionType.Read:
+    case ActionType.Current:
+      return state.map((book) => {
+        if (book.id === action.payload.id) {
+          return {
+            ...book,
+            shelf: action.type,
+          };
+        }
+        return book;
+      });
+    case ActionType.SearchNull:
+      return [];
+    default:
+      return state;
   }
 };
 
