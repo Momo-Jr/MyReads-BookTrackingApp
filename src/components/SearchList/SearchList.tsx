@@ -22,7 +22,7 @@ const SearchList: React.FC = () => {
     const value = event.target.value;
     setMessage(value);
     if (value !== '') {
-      BookApis.search(value, 20)
+      BookApis.search(value, 10)
         .then((booksFound) => {
           getSearched(booksFound);
         })

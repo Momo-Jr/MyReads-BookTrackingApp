@@ -1,11 +1,27 @@
-// import React from 'react';
-// import { create } from 'react-test-renderer';
-// import SearchList from './SearchList';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { IShelf } from '../../models/Book';
+import { store } from '../../state';
+import Shelf from '../BookShelf/Shelf';
 
-// describe('SearchList component', () => {
-//   it('renders correctly', () => {
-//     const component = create(<SearchList />);
-//     const tree = component.toJSON();
-//     expect(tree).toMatchSnapshot();
-//   });
-// });
+describe('Shelf Component Test', () => {
+  test('test rendering books', () => {
+    const bookData = [
+      {
+        id: 'testid',
+        authors: ['test author'],
+        shelf: 'testshelf',
+        title: 'test title',
+        imageLinks: { smallThumbnail: 'test path' },
+      },
+    ];
+    const shelf: IShelf = { key: 'read', name: 'Read' };
+    render(
+      <Provider store={store}>
+        <Shelf books={bookData} key={shelf.key} shelf={shelf} />
+      </Provider>
+    );
+    const renderElement = screen.getByText('Move To');
+    expect(renderElement).toBeInTheDocument();
+  });
+});
