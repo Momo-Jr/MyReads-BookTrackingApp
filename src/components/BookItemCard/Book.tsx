@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { remove, update } from '../../BookAPI';
 import { IBook } from '../../models/Book';
 import { actionCreators } from '../../state';

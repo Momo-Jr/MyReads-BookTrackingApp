@@ -1,14 +1,15 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { InlineConfig, UserConfig, defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
+interface VitestConfigExport extends UserConfig {
+  test: InlineConfig;
+}
+
 export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-
-    environment: 'jsdom',
-
-    setupFiles: './setupTests.ts',
+    environment: 'happy-dom',
+    setupFiles: ['./setupTest.ts'],
   },
-});
+} as VitestConfigExport);
