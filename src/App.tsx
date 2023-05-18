@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import NavBar from './components/NavigationBar/NavBar';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import SearchPage from './pages/SearchPage';
+import SignUpPage from './pages/Signup';
 function App() {
   return (
     <div className='app'>
@@ -11,6 +11,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='Search' element={<SearchPage />} />
           <Route path='Login' element={<LoginPage />} />
+          <Route path='signup' element={<SignUpPage />} />
         </Routes>
       </BrowserRouter>
     </div>

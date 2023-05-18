@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getAll } from '../BookAPI';
 import Shelf from '../components/BookShelf/Shelf';
 import NavBar from '../components/NavigationBar/NavBar';
-import Search from '../components/SearchBar/Search';
+import Search from '../components/SearchToggle/Search';
 import { IBook, IShelf, shelves } from '../models/Book';
 import { actionCreators } from '../state';
 import { RootState } from '../state/reducers';

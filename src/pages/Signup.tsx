@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavigationBar/NavBar';
-import './LoginPage.css';
+import './Signup.css';
 
-const LoginPage: React.FC = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (event: React.FormEvent) => {
+  const handleSignUp = (event: any) => {
     event.preventDefault();
 
-    if (email.trim() === '' || password.trim() === '') {
+    if (
+      email.trim() === '' ||
+      password.trim() === '' ||
+      confirmPassword.trim() === ''
+    ) {
       setError('Please fill in all fields');
       return;
     }
@@ -22,21 +27,21 @@ const LoginPage: React.FC = () => {
       return;
     }
 
-    if (password === '1234') {
-      setError('Password cannot be 1234');
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
       return;
     }
-
-    navigate('/');
+    navigate('/login');
   };
 
   return (
-    <div>
+    <>
       <NavBar />
-      <div className='login-page'>
+
+      <div className='signup-page'>
         <div className='card'>
-          <h1>Login Page</h1>
-          <form onSubmit={handleLogin}>
+          <h1>Sign Up Page</h1>
+          <form onSubmit={handleSignUp}>
             <div className='form-group'>
               <label>Email:</label>
               <input
@@ -53,16 +58,24 @@ const LoginPage: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            <div className='form-group'>
+              <label>Confirm Password:</label>
+              <input
+                type='password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
             {error && <div className='error'>{error}</div>}
-            <button type='submit'>Login</button>
+            <button type='submit'>Sign Up</button>
+            <p>
+              Already have an account? <Link to='/login'>Log in</Link>
+            </p>
           </form>
-          <p>
-            Don't have an account? <Link to='/signup'>Sign up</Link>
-          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
