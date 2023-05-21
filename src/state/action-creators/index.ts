@@ -3,14 +3,15 @@ import { IBook } from '../../models/Book';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
-export const addWantToRead = (payload: any) => (dispatch: Dispatch<Action>) => {
-  dispatch({
-    type: ActionType.Want,
-    payload,
-  });
-};
+export const addWantToRead =
+  (payload: IBook) => (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.Want,
+      payload,
+    });
+  };
 
-export const addRead = (payload: any) => (dispatch: Dispatch<Action>) => {
+export const addRead = (payload: IBook) => (dispatch: Dispatch<Action>) => {
   dispatch({
     type: ActionType.Read,
     payload,
@@ -18,7 +19,7 @@ export const addRead = (payload: any) => (dispatch: Dispatch<Action>) => {
 };
 
 export const addCurrentlyReading =
-  (payload: any) => (dispatch: Dispatch<Action>) => {
+  (payload: IBook) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.Current,
       payload,
@@ -31,19 +32,21 @@ export const removeBook = (book: IBook): Action => {
   };
 };
 
-export const getAllBooks = (payload: any[]) => (dispatch: Dispatch<Action>) => {
-  dispatch({
-    type: ActionType.GetAll,
-    payload,
-  });
-};
+export const getAllBooks =
+  (payload: IBook[]) => (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.GetAll,
+      payload,
+    });
+  };
 
-export const getSearched = (payload: any[]) => (dispatch: Dispatch<Action>) => {
-  dispatch({
-    type: ActionType.Searched,
-    payload,
-  });
-};
+export const getSearched =
+  (payload: IBook[]) => (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.Searched,
+      payload,
+    });
+  };
 
 export const emptySearch = () => (dispatch: Dispatch<Action>) => {
   dispatch({
