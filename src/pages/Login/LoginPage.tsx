@@ -3,7 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavigationBar/NavBar';
 import './LoginPage.css';
 
-const LoginPage: React.FC = () => {
+interface LoginPageProps {
+  onLogin: () => void;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,12 +31,12 @@ const LoginPage: React.FC = () => {
       return;
     }
 
+    onLogin(); // Call onLogin prop to update login state
     navigate('/');
   };
 
   return (
     <div>
-      <NavBar />
       <div className='login-page'>
         <div className='card'>
           <h1>Login Page</h1>

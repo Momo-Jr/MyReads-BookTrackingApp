@@ -17,11 +17,16 @@
   margin-right: 20px;
 }
 
-.loginButton {
+.loginButton,
+.logoutButton {
   padding: 8px 16px;
   background-color: #008c8a;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.logoutButton {
+  background-color: #001dc4;
 }

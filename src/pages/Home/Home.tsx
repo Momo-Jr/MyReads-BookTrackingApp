@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAll } from '../../BookAPI';
@@ -9,6 +9,7 @@ import { IBook, IShelf, shelves } from '../../models/Book';
 import { actionCreators } from '../../state';
 import { RootState } from '../../state/reducers';
 import './Home.css';
+
 function Home() {
   const AllBooks = useSelector((state: RootState) => state.book);
   const dispatch = useDispatch();
@@ -26,7 +27,6 @@ function Home() {
 
   return (
     <div className='list-books'>
-      <NavBar />
       <div className='list-books-content'>
         <div>
           {shelves.map((shelf) => (

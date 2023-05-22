@@ -36,8 +36,6 @@ const SignUpPage = () => {
 
   return (
     <>
-      <NavBar />
-
       <div className='signup-page'>
         <div className='card'>
           <h1>Sign Up Page</h1>
