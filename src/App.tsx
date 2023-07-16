@@ -15,6 +15,7 @@ const App: React.FC = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    console.log('new feature example');
   };
 
   return (
